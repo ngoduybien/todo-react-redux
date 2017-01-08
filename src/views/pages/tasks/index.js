@@ -1,15 +1,20 @@
-import { List } from 'immutable';
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
+import {List} from 'immutable';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
 
-import { getNotification, notificationActions } from 'src/core/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/core/tasks';
+import {getNotification, notificationActions} from 'src/core/notification';
+import {getTaskFilter, getVisibleTasks, tasksActions} from 'src/core/tasks';
+import {userActions} from 'src/core/users';
+import {gameActions} from 'src/core/games';
+import { authActions, getAuth } from 'src/core/auth';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
 import TaskForm from '../../components/task-form';
 import TaskList from '../../components/task-list';
 
+import CreateGame from '../../components/create-game';
+import CurrentUser from '../../components/current-user';
 
 export class Tasks extends Component {
   static propTypes = {
@@ -24,7 +29,10 @@ export class Tasks extends Component {
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    createGame: PropTypes.func.isRequired,
+    createUser: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -43,7 +51,7 @@ export class Tasks extends Component {
   }
 
   renderNotification() {
-    const { notification } = this.props;
+    const {notification} = this.props;
     return (
       <Notification
         action={this.props.undeleteTask}
@@ -59,11 +67,21 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-          <TaskForm createTask={this.props.createTask} />
+          <CurrentUser auth={this.props.auth}/>
+        </div>
+        <div className="g-col">
+          <CreateGame
+            auth={this.props.auth}
+            createGame={this.props.createGame}
+          />
         </div>
 
         <div className="g-col">
-          <TaskFilters filter={this.props.filterType} />
+          <TaskForm createTask={this.props.createTask}/>
+        </div>
+
+        <div className="g-col">
+          <TaskFilters filter={this.props.filterType}/>
           <TaskList
             deleteTask={this.props.deleteTask}
             tasks={this.props.tasks}
@@ -86,16 +104,22 @@ const mapStateToProps = createSelector(
   getNotification,
   getTaskFilter,
   getVisibleTasks,
-  (notification, filterType, tasks) => ({
+  getAuth,
+  (notification, filterType, tasks, auth) => ({
     notification,
     filterType,
-    tasks
+    tasks,
+    auth
   })
 );
+
 
 const mapDispatchToProps = Object.assign(
   {},
   tasksActions,
+  userActions,
+  authActions,
+  gameActions,
   notificationActions
 );
 

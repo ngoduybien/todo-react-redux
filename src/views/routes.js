@@ -7,7 +7,8 @@ import Tasks from './pages/tasks';
 export const paths = {
   ROOT: '/',
   SIGN_IN: '/sign-in',
-  TASKS: '/'
+  TASKS: '/',
+  ADMIN: '/admin'
 };
 
 

@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 
 
-class TaskForm extends Component {
+class UserForm extends Component {
   static propTypes = {
-    createTask: PropTypes.func.isRequired
+    createUser: PropTypes.func.isRequired
   };
 
   constructor(props, context) {
     super(props, context);
 
-    this.state = {title: ''};
+    this.state = {user: ''};
 
     this.onChange = ::this.onChange;
     this.onKeyUp = ::this.onKeyUp;
@@ -17,11 +17,11 @@ class TaskForm extends Component {
   }
 
   clearInput() {
-    this.setState({title: ''});
+    this.setState({user: ''});
   }
 
   onChange(event) {
-    this.setState({title: event.target.value});
+    this.setState({user: event.target.value});
   }
 
   onKeyUp(event) {
@@ -31,9 +31,11 @@ class TaskForm extends Component {
   }
 
   onSubmit(event) {
+    console.log('user onSubmit');
     event.preventDefault();
-    const title = this.state.title.trim();
-    if (title.length) this.props.createTask(title);
+    const user = this.state.user.trim();
+    console.log(user);
+    if (user.length) this.props.createUser(user);
     this.clearInput();
   }
 
@@ -47,14 +49,14 @@ class TaskForm extends Component {
           maxLength="64"
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
-          placeholder="What needs to be done???"
-          ref={c => this.titleInput = c}
+          placeholder="Enter username..."
+          ref={c => this.userInput = c}
           type="text"
-          value={this.state.title}
+          value={this.state.user}
         />
       </form>
     );
   }
 }
 
-export default TaskForm;
+export default UserForm;
