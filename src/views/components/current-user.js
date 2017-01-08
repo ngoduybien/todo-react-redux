@@ -1,23 +1,13 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 
-
-class CurrentUser extends Component {
-  static propTypes = {
-    auth: PropTypes.object.isRequired
-  };
-
-  constructor(props, context) {
-    super(props, context);
-
-    // this.state = {user: ''};
-  }
-
-
-  render() {
-    return (
-      <h1>Hi {this.props.auth.displayName}!</h1>
-    );
-  }
+function CurrentUser({auth}) {
+  return (
+    <h1>Hi {auth.displayName}!</h1>
+  );
 }
+
+CurrentUser.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 export default CurrentUser;
