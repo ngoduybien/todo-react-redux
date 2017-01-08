@@ -31,10 +31,10 @@ class UserForm extends Component {
   }
 
   onSubmit(event) {
-    console.log('user onSubmit');
+    // console.log('user onSubmit');
     event.preventDefault();
     const user = this.state.user.trim();
-    console.log(user);
+    // console.log(user);
     if (user.length) this.props.createUser(user);
     this.clearInput();
   }

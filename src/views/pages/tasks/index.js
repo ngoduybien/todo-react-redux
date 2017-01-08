@@ -67,7 +67,7 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-          <CurrentUser auth={this.props.auth}/>
+          <CurrentUser auth={this.props.auth} />
         </div>
         <div className="g-col">
           <CreateGame
@@ -77,11 +77,11 @@ export class Tasks extends Component {
         </div>
 
         <div className="g-col">
-          <TaskForm createTask={this.props.createTask}/>
+          <TaskForm createTask={this.props.createTask} />
         </div>
 
         <div className="g-col">
-          <TaskFilters filter={this.props.filterType}/>
+          <TaskFilters filter={this.props.filterType} />
           <TaskList
             deleteTask={this.props.deleteTask}
             tasks={this.props.tasks}

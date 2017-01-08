@@ -1,15 +1,15 @@
-//import {getDeletedTask} from './selectors';
+// import {getDeletedTask} from './selectors';
 import {gameList} from './game-list';
 import {
   CREATE_GAME_SUCCESS,
-  CREATE_GAME_ERROR,
+  CREATE_GAME_ERROR
 } from './action-types';
 
 
 export function createGame(userId) {
   return dispatch => {
     const game = {host: userId, participants: [userId]};
-    console.log(game);
+    // console.log(game);
     gameList.push(game)
       .catch(error => dispatch(createGameError(error)));
   };

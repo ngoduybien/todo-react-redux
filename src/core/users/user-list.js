@@ -4,8 +4,8 @@ import { User } from './user';
 
 
 export const userList = new FirebaseList({
-  onAdd: userActions.createUserSuccess,
-  //onChange: taskActions.updateTaskSuccess,
-  //onLoad: taskActions.loadTasksSuccess,
-  //onRemove: taskActions.deleteTaskSuccess
-}, User, "users");
+  onAdd: userActions.createUserSuccess
+  // onChange: taskActions.updateTaskSuccess,
+  // onLoad: taskActions.loadTasksSuccess,
+  // onRemove: taskActions.deleteTaskSuccess
+}, User, 'users');

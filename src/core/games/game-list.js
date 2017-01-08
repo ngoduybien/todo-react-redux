@@ -4,8 +4,8 @@ import { Game } from './game';
 
 
 export const gameList = new FirebaseList({
-  onAdd: gameActions.createGameSuccess,
-  //onChange: taskActions.updateTaskSuccess,
-  //onLoad: taskActions.loadTasksSuccess,
-  //onRemove: taskActions.deleteTaskSuccess
-}, Game, "games");
+  onAdd: gameActions.createGameSuccess
+  // onChange: taskActions.updateTaskSuccess,
+  // onLoad: taskActions.loadTasksSuccess,
+  // onRemove: taskActions.deleteTaskSuccess
+}, Game, 'games');

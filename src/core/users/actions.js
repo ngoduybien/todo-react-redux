@@ -1,14 +1,14 @@
-//import {getDeletedTask} from './selectors';
+// import {getDeletedTask} from './selectors';
 import {userList} from './user-list';
 import {
   CREATE_USER_SUCCESS,
-  CREATE_USER_ERROR,
+  CREATE_USER_ERROR
 } from './action-types';
 
 
 export function createUser(user) {
   return dispatch => {
-    console.log(user);
+    // console.log(user);
     userList.push({email: user, name: user})
       .catch(error => dispatch(createUserError(error)));
   };
