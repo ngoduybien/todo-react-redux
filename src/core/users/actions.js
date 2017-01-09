@@ -1,8 +1,16 @@
-// import {getDeletedTask} from './selectors';
+// import {getDeletedUser} from './selectors';
 import {userList} from './user-list';
 import {
+  CREATE_USER_ERROR,
   CREATE_USER_SUCCESS,
-  CREATE_USER_ERROR
+  DELETE_USER_ERROR,
+  DELETE_USER_SUCCESS,
+  FILTER_USERS,
+  LOAD_USERS_SUCCESS,
+  UNDELETE_USER_ERROR,
+  UNLOAD_USERS_SUCCESS,
+  UPDATE_USER_ERROR,
+  UPDATE_USER_SUCCESS
 } from './action-types';
 
 
@@ -28,3 +36,17 @@ export function createUserSuccess(user) {
   };
 }
 
+export function loadUsers() {
+  return (dispatch, getState) => {
+    const { auth } = getState();
+    userList.path = 'users';
+    userList.subscribe(dispatch);
+  };
+}
+
+export function unloadUsers() {
+  userList.unsubscribe();
+  return {
+    type: UNLOAD_USERS_SUCCESS
+  };
+}

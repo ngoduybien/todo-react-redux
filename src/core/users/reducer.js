@@ -5,15 +5,15 @@ import {
 } from 'src/core/auth';
 
 import {
-  CREATE_TASK_SUCCESS,
-  DELETE_TASK_SUCCESS,
-  FILTER_TASKS,
-  LOAD_TASKS_SUCCESS,
-  UPDATE_TASK_SUCCESS
+  CREATE_USER_SUCCESS,
+  LOAD_USERS_SUCCESS,
+  DELETE_USER_SUCCESS,
+  FILTER_USERS,
+  UPDATE_USER_SUCCESS
 } from './action-types';
 
 
-export const TasksState = new Record({
+export const UsersState = new Record({
   deleted: null,
   filter: '',
   list: new List(),
@@ -21,9 +21,9 @@ export const TasksState = new Record({
 });
 
 
-export function tasksReducer(state = new TasksState(), {payload, type}) {
+export function usersReducer(state = new UsersState(), {payload, type}) {
   switch (type) {
-    case CREATE_TASK_SUCCESS:
+    case CREATE_USER_SUCCESS:
       return state.merge({
         deleted: null,
         previous: null,
@@ -32,30 +32,30 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
               state.list.unshift(payload)
       });
 
-    case DELETE_TASK_SUCCESS:
+    case DELETE_USER_SUCCESS:
       return state.merge({
         deleted: payload,
         previous: state.list,
-        list: state.list.filter(task => task.key !== payload.key)
+        list: state.list.filter(user => user.key !== payload.key)
       });
 
-    case FILTER_TASKS:
+    case FILTER_USERS:
       return state.set('filter', payload.filterType || '');
 
-    case LOAD_TASKS_SUCCESS:
+    case LOAD_USERS_SUCCESS:
       return state.set('list', new List(payload.reverse()));
 
-    case UPDATE_TASK_SUCCESS:
+    case UPDATE_USER_SUCCESS:
       return state.merge({
         deleted: null,
         previous: null,
-        list: state.list.map(task => {
-          return task.key === payload.key ? payload : task;
+        list: state.list.map(user => {
+          return user.key === payload.key ? payload : user;
         })
       });
 
     case SIGN_OUT_SUCCESS:
-      return new TasksState();
+      return new UsersState();
 
     default:
       return state;

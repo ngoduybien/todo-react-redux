@@ -30,16 +30,19 @@ export class Tasks extends Component {
     filterTasks: PropTypes.func.isRequired,
     filterType: PropTypes.string.isRequired,
     loadTasks: PropTypes.func.isRequired,
+    loadUsers: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
+    unloadUsers: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired
   };
 
   componentWillMount() {
     this.props.loadTasks();
+    this.props.loadUsers();
     this.props.filterTasks(this.props.location.query.filter);
   }
 
@@ -51,6 +54,7 @@ export class Tasks extends Component {
 
   componentWillUnmount() {
     this.props.unloadTasks();
+    this.props.unloadUsers();
   }
 
   renderNotification() {
