@@ -32,7 +32,7 @@ export function createGameSuccess(game) {
 export function loadGames() {
   return (dispatch, getState) => {
     const { auth } = getState();
-    gameList.path = `tasks/${auth.id}`;
+    gameList.path = 'games';
     gameList.subscribe(dispatch);
   };
 }

@@ -16,9 +16,15 @@ import TaskList from '../../components/task-list';
 import CreateGame from '../../components/create-game';
 import CurrentUser from '../../components/current-user';
 
+import UserForm from '../../components/user-form';
+
+
 export class Tasks extends Component {
   static propTypes = {
+    auth: PropTypes.object.isRequired,
+    createGame: PropTypes.func.isRequired,
     createTask: PropTypes.func.isRequired,
+    createUser: PropTypes.func.isRequired,
     deleteTask: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
     filterTasks: PropTypes.func.isRequired,
@@ -29,10 +35,7 @@ export class Tasks extends Component {
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-    createGame: PropTypes.func.isRequired,
-    createUser: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -74,6 +77,10 @@ export class Tasks extends Component {
             auth={this.props.auth}
             createGame={this.props.createGame}
           />
+        </div>
+
+        <div className="g-col">
+          <UserForm createUser={this.props.createUser} />
         </div>
 
         <div className="g-col">
